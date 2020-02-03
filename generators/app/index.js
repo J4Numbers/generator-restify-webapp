@@ -25,4 +25,8 @@ module.exports = class extends Generator {
       },
     ]);
   }
+
+  reportParams () {
+    console.log(this.setup);
+  }
 };
