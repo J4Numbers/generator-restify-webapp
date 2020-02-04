@@ -46,7 +46,7 @@ onEventHandlers(server);
 
 routingEngine(server);
 
-server.listen(config.get('app-port'), () => {
+server.listen(config.get('app.port'), () => {
   log.info(`${server.name} listening at ${server.url}`);
 });
 
