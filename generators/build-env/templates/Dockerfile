@@ -1,7 +1,7 @@
 # Stage 1 - Compile repository
 FROM REDACTED:8082/library/node:12-alpine as compile
 WORKDIR /usr/src/app
-COPY . .
+COPY ../../webapp/templates .
 RUN npm set repository "http://REDACTED/repository/npm-npmjs/" &&\
     npm install
 
