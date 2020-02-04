@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "description": "A yeoman generator for creating a Restify webserver",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "quality:esjlint": "esjlint ./generators/**/*"
   },
   "files": [
     "generators"
@@ -23,5 +24,8 @@
   "homepage": "https://github.com/J4Numbers/generator-restify-webapp#readme",
   "dependencies": {
     "yeoman-generator": "^4.5.0"
+  },
+  "devDependencies": {
+    "ejs-lint": "^1.0.1"
   }
 }
