@@ -10,7 +10,7 @@ module.exports = class extends Generator {
     this.setup = await this.prompt([
       {
         type: 'input',
-        name: 'project_name',
+        name: 'app_name',
         message: 'What is the name of your project?',
       },
       {
@@ -26,7 +26,8 @@ module.exports = class extends Generator {
     ]);
   }
 
-  initializing () {
+  configuring () {
+    this.log(this.setup);
     this.composeWith(require.resolve('../build-env'), this.setup);
     this.composeWith(require.resolve('../webapp'), this.setup);
   }

@@ -4,6 +4,7 @@ const Generator = require('yeoman-generator');
 module.exports = class extends Generator {
   constructor (args, opts) {
     super(args, opts);
+    this.setup = opts;
   }
 
   _extendScripts () {
@@ -19,7 +20,7 @@ module.exports = class extends Generator {
         'test:mocha': 'NODE_ENV=test nyc --all mocha --config test/.mocharc.js'
       }
     };
-    this.fs.extendJSON(this.destinationPath('package.json', allScripts));
+    this.fs.extendJSON(this.destinationPath('package.json'), allScripts);
   }
 
   _installDependencies () {
@@ -31,6 +32,7 @@ module.exports = class extends Generator {
   }
 
   install () {
+    this._extendScripts();
     this._installDependencies();
     this._installDevDependencies();
   }
@@ -39,6 +41,7 @@ module.exports = class extends Generator {
     this.fs.copy(
         this.templatePath('./**/*'),
         this.destinationPath('./'),
+        { globOptions: { dot: true } },
     )
   }
 

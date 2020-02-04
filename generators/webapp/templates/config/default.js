@@ -5,7 +5,7 @@ module.exports = {
       key: '/path/to/key/file',
       cert: '/path/to/cert/file',
     },
-    name: '<%= app_name =>',
+    name: '<%= app_name %>',
     hostname: 'localhost',
     port: '8080',
   },

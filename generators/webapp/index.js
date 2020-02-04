@@ -4,16 +4,19 @@ const Generator = require('yeoman-generator');
 module.exports = class extends Generator {
   constructor (args, opts) {
     super(args, opts);
+    this.setup = opts;
   }
 
   _moveStaticFiles () {
     this.fs.copy(
         this.templatePath('./src/**/*.js'),
         this.destinationPath('./src'),
+        { globOptions: { dot: true } },
     );
     this.fs.copy(
         this.templatePath('./test/**/*.js'),
         this.destinationPath('./test'),
+        { globOptions: { dot: true } },
     );
   }
 
