@@ -10,6 +10,7 @@ const preRequestHandlers = require('./lib/middleware/pre_handlers');
 
 const log = loggerEngine.bunyanLogger();
 
+<% if (enable_http2) { %>
 let http2Config;
 if (config.get('app.http2.enabled')) {
   log.info('HTTP/2 configuration accepted...');
@@ -18,6 +19,7 @@ if (config.get('app.http2.enabled')) {
     cert: fs.readFileSync(config.get('app.http2.cert')),
   };
 }
+<% } -%>
 
 const server = restify.createServer({
   name: config.get('app.name'),

@@ -27,7 +27,6 @@ module.exports = class extends Generator {
   }
 
   configuring () {
-    this.log(this.setup);
     this.composeWith(require.resolve('../build-env'), this.setup);
     this.composeWith(require.resolve('../webapp'), this.setup);
   }
