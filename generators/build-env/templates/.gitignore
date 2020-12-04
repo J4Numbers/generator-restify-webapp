@@ -1,6 +1,7 @@
 .idea/
 *.iml
 
+public/
 coverage/
 .nyc_output/
 
