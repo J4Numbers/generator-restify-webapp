@@ -23,6 +23,16 @@ module.exports = class extends Generator {
         name: 'enable_rendering',
         message: 'Will you be rendering any HTML?',
       },
+      {
+        type: 'list',
+        name: 'base_engine',
+        message: 'Which rendering templates would you like to use?',
+        choices: [
+            'GovUK',
+            'Bootstrap',
+            'None',
+        ]
+      }
     ]);
   }
 

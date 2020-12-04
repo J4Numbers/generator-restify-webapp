@@ -11,12 +11,6 @@ module.exports = {
     hostname: 'localhost',
     port: '8080',
   },
-  functionality: {},
-  <%_ if (enable_html) { %>
-  nunjucks: {
-    options: {},
-  },
-  <% } -%>
   logger: {
     level: 'info',
   },

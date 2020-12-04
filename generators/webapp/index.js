@@ -9,7 +9,7 @@ module.exports = class extends Generator {
 
   _moveStaticFiles () {
     this.fs.copyTpl(
-        this.templatePath('./src/**/*.js'),
+        this.templatePath('./src/**/*'),
         this.destinationPath('./src'),
         this.setup,
         {},
@@ -23,27 +23,8 @@ module.exports = class extends Generator {
     );
   }
 
-  _moveConfigurableFiles () {
-    this.fs.copyTpl(
-        this.templatePath('./config/default.js'),
-        this.destinationPath('./config/default.js'),
-        this.setup,
-    );
-    this.fs.copyTpl(
-        this.templatePath('./config/test.js'),
-        this.destinationPath('./config/test.js'),
-        this.setup,
-    );
-    this.fs.copyTpl(
-        this.templatePath('./config/custom-environment-variables.js'),
-        this.destinationPath('./config/custom-environment-variables.js'),
-        this.setup,
-    );
-  }
-
   shiftFiles () {
     this._moveStaticFiles();
-    this._moveConfigurableFiles();
   }
 
 };

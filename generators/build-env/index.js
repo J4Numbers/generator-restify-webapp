@@ -9,13 +9,15 @@ module.exports = class extends Generator {
 
   _extendScripts () {
     const allScripts = {
-      main: 'src/app.js',
+      main: 'src/server/app.js',
       scripts: {
-        'quality:eslint': 'eslint .',
-        'quality:eslint:fix': 'eslint . --fix',
-        'regenerate-scripts': 'openssl req -x509 rsa:2048 -nodes -sha256 -subj "/CN=localhost" -keyout test/spec/helpers/certs/localhost-privkey.pem -out test/spec/helpers/certs/localhost-cert.pem',
+        'compile:assets': 'gulp assets',
+        'compile:clean': 'gulp clean',
+        'compile:templates': 'node bin/compile.js',
+        'compile': 'npm run compile:clean && npm run compile:assets && npm run compile:templates',
+        'regenerate-scripts': 'openssl req -x509 rsa:2048 -days 365 -nodes -sha256 -subj "/CN=localhost" -keyout certs/localhost-privkey.pem -out certs/localhost-cert.pem',
+        'run:dev': 'node src/server/app.js',
         'security:vulnerable-packages': 'npm audit --registry=https://registry.npmjs.org',
-        'start': 'node src/app.js',
         'test': 'npm run test:mocha',
         'test:mocha': 'NODE_ENV=test nyc --all mocha --config test/.mocharc.js'
       }
@@ -24,11 +26,11 @@ module.exports = class extends Generator {
   }
 
   _installDependencies () {
-    this.npmInstall([ 'bunyan', 'config', 'restify', 'restify-errors', 'uuid' ], { save: true });
+    this.npmInstall([ 'bunyan', 'config' ], { save: true });
   }
 
   _installDevDependencies() {
-    this.npmInstall([ '@dwp/eslint-config-base', '@dwp/eslint-config-mocha', 'chai', 'chai-as-promised', 'chai-http', 'clear-require', 'eslint', 'import-fresh', 'mocha', 'mock-require', 'nyc', 'sinon', 'sinon-chai' ], { 'save-dev': true });
+    this.npmInstall([ '@babel/core', '@babel/preset-env', 'del', 'gulp', 'gulp-babel', 'gulp-sass', 'nunjucks', 'chai', 'chai-as-promised', 'chai-http', 'clear-require', 'import-fresh', 'mocha', 'mock-require', 'nyc', 'sinon', 'sinon-chai' ], { 'save-dev': true });
   }
 
   install () {
@@ -37,16 +39,18 @@ module.exports = class extends Generator {
     this._installDevDependencies();
   }
 
-  _moveConfigs () {
-    this.fs.copy(
+  _moveConfigurableFiles () {
+    this.fs.copyTpl(
         this.templatePath('./**/*'),
         this.destinationPath('./'),
+        this.setup,
+        {},
         { globOptions: { dot: true } },
-    )
+    );
   }
 
   shiftFiles () {
-    this._moveConfigs();
+    this._moveConfigurableFiles();
   }
 
 };
