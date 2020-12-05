@@ -58,22 +58,37 @@ describe('build: Build environment generator', function () {
       });
   });
 
-  it('Should generate a compilation script for templates which is unedited from the template', function () {
+  it('Should generate a compilation script for templates which does not contain additional build imports', function () {
     return runBuildEnvGenerator()
-    .then((result) => {
-      expect(fs.readdirSync(result)).to.contain('bin');
-      expect(fs.readdirSync(path.resolve(result, 'bin'))).to.contain('compile.js');
+      .then((result) => {
+        expect(fs.readdirSync(result)).to.contain('bin');
+        expect(fs.readdirSync(path.resolve(result, 'bin'))).to.contain('compile.js');
 
-      const sourceFile = fs.readFileSync(
-        path.join(__dirname, '../../../../generators/build-env/templates/bin/compile.js'),
-        { encoding: 'utf-8' },
-      );
-      const deployedFile = fs.readFileSync(
-          path.join(result, 'bin/compile.js'),
-          { encoding: 'utf-8' },
-      );
-      expect(deployedFile).to.equal(sourceFile);
-    });
+        const deployedFile = fs.readFileSync(
+            path.join(result, 'bin/compile.js'),
+            { encoding: 'utf-8' },
+        );
+        expect(deployedFile).to.not.contain("new nunjucks.FileSystemLoader('node_modules/govuk-frontend/govuk/')");
+      });
+  });
+
+  it('Should generate a compilation script for templates with govuk imports when using that base engine', function () {
+    return yHelpers
+      .run(path.join(__dirname, '../../../../generators/build-env'))
+      .withOptions({
+        app_name: 'test-build',
+        base_engine: 'GovUK',
+      })
+      .then((result) => {
+        expect(fs.readdirSync(result)).to.contain('bin');
+        expect(fs.readdirSync(path.resolve(result, 'bin'))).to.contain('compile.js');
+
+        const deployedFile = fs.readFileSync(
+            path.join(result, 'bin/compile.js'),
+            { encoding: 'utf-8' },
+        );
+        expect(deployedFile).to.contain("new nunjucks.FileSystemLoader('node_modules/govuk-frontend/govuk/')");
+      });
   });
 
   it('Should generate an empty certificates directory', function () {
