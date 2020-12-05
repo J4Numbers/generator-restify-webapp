@@ -3,8 +3,10 @@
   "version": "0.1.0",
   "description": "A yeoman generator for creating a prototype webserver base",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "quality:esjlint": "esjlint ./generators/**/*"
+    "quality": "npm run quality:ejslint",
+    "quality:ejslint": "ejslint ./generators/**/*",
+    "test": "npm run test:mocha",
+    "test:mocha": "NODE_ENV=test nyc --nycrc-path ./nyc.config.js --all mocha --config tests/.mocharc.js"
   },
   "files": [
     "generators"
@@ -26,6 +28,10 @@
     "yeoman-generator": "^4.12.0"
   },
   "devDependencies": {
-    "ejs-lint": "^1.1.0"
+    "chai": "^4.2.0",
+    "ejs-lint": "^1.1.0",
+    "mocha": "^8.2.1",
+    "nyc": "^15.1.0",
+    "yeoman-test": "^3.0.0"
   }
 }
