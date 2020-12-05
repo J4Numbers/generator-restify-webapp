@@ -23,3 +23,7 @@ global.clearRequire = (module) => require('clear-require')(module);
 global.startMockRequire = (module, replacement) => require('mock-require')(module, replacement);
 
 global.stopMockRequire = (module) => require('mock-require').stop(module);
+
+global.refreshPage = async (browser, visitPath) => {
+  await browser.visit(visitPath);
+}

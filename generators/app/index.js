@@ -14,16 +14,6 @@ module.exports = class extends Generator {
         message: 'What is the name of your project?',
       },
       {
-        type: 'confirm',
-        name: 'enable_http2',
-        message: 'Do you want to enable HTTP/2?',
-      },
-      {
-        type: 'confirm',
-        name: 'enable_rendering',
-        message: 'Will you be rendering any HTML?',
-      },
-      {
         type: 'list',
         name: 'base_engine',
         message: 'Which rendering templates would you like to use?',
@@ -31,8 +21,8 @@ module.exports = class extends Generator {
             'GovUK',
             'Bootstrap',
             'None',
-        ]
-      }
+        ],
+      },
     ]);
   }
 
