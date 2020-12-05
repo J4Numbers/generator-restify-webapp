@@ -23,9 +23,9 @@
   },
   "homepage": "https://github.com/J4Numbers/generator-restify-webapp#readme",
   "dependencies": {
-    "yeoman-generator": "^4.5.0"
+    "yeoman-generator": "^4.12.0"
   },
   "devDependencies": {
-    "ejs-lint": "^1.0.1"
+    "ejs-lint": "^1.1.0"
   }
 }
