@@ -1,7 +1,7 @@
 {
-  "name": "generator-restify-webapp",
+  "name": "generator-prototype-webapp",
   "version": "0.1.0",
-  "description": "A yeoman generator for creating a Restify webserver",
+  "description": "A yeoman generator for creating a prototype webserver base",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "quality:esjlint": "esjlint ./generators/**/*"

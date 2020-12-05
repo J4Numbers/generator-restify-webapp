@@ -30,7 +30,7 @@ module.exports = class extends Generator {
   }
 
   _installDevDependencies() {
-    this.npmInstall([ '@babel/core', '@babel/preset-env', 'del', 'gulp', 'gulp-babel', 'gulp-sass', 'nunjucks', 'chai', 'chai-as-promised', 'chai-http', 'clear-require', 'import-fresh', 'mocha', 'mock-require', 'nyc', 'sinon', 'sinon-chai' ], { 'save-dev': true });
+    this.npmInstall([ '@babel/core', '@babel/preset-env', 'del', 'gulp', 'gulp-babel', 'gulp-sass', 'nunjucks', 'chai', 'chai-as-promised', 'chai-http', 'clear-require', 'import-fresh', 'mocha', 'mock-require', 'nyc', 'sinon', 'sinon-chai', 'zombie' ], { 'save-dev': true });
   }
 
   install () {
