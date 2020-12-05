@@ -21,7 +21,7 @@
 {% block header %}
     {{ govukHeader({
         homepageUrl: "/",
-        serviceName: metadata.name
+        serviceName: metadata.name,
         serviceUrl: "/",
         classes: "app-header",
         containerClasses: "app-width-container"
@@ -59,8 +59,8 @@
 {% endblock %}
 
 {% block bodyEnd %}
-    <script src="/assets/javascript/all.js" type="application/javascript" ></script>
-    <script>window.GOVUKFrontent.initAll()</script>
+    <script src="/assets/js/all.js" type="application/javascript" ></script>
+    <script>window.GOVUKFrontend.initAll()</script>
     {% block bodyEndAdditional %}
     {% endblock %}
 {% endblock %}

@@ -4,6 +4,7 @@ module.exports = {
     'generators/**/templates/',
     'node_modules/',
     'tests/',
+    'yo-test',
     'nyc.config.js',
     'package.json',
     'package-lock.json',

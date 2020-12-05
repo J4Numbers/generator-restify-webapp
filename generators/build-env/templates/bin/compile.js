@@ -7,6 +7,9 @@ const config = require('../config/compile.config.js');
 
 const nunEnv = new nunjucks.Environment(
     [
+      <% if (base_engine === 'GovUK') { -%>
+        new nunjucks.FileSystemLoader('node_modules/govuk-frontend/govuk/'),
+      <% } -%>
       new nunjucks.FileSystemLoader('out/styles/'),
       new nunjucks.FileSystemLoader('src/views/'),
     ],

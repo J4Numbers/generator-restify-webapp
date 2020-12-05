@@ -41,7 +41,7 @@ module.exports = class extends Generator {
 
   _testGovukFramework () {
     if (this.setup.base_engine === 'GovUK') {
-      this.npmInstall([ 'govuk-frontend' ], { save: true });
+      this.npmInstall([ 'govuk-frontend' ], { 'save-dev': true });
       this.gulpSources.fonts.src.push('node_modules/govuk-frontend/govuk/assets/fonts/**/*');
       this.gulpSources.images.src.push('node_modules/govuk-frontend/govuk/assets/images/**/*');
       this.gulpSources.scripts.src.push('node_modules/govuk-frontend/govuk/*.js');
