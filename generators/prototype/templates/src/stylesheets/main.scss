@@ -1,3 +1,7 @@
 /**
  * This is an empty file for you to fill in your styles as you please.
  */
+
+<% if (base_engine === 'GovUK') { -%>
+@import "node_modules/govuk-frontend/govuk/all"
+<% } -%>

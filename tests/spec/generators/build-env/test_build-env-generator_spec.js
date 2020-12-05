@@ -38,10 +38,24 @@ describe('build: Build environment generator', function () {
 
   it('Should generate a Gulpfile', function () {
     return runBuildEnvGenerator()
-    .then((result) => {
-      const fileList = fs.readdirSync(result);
-      expect(fileList).to.contain('gulpfile.js');
-    });
+      .then((result) => {
+        const fileList = fs.readdirSync(result);
+        expect(fileList).to.contain('gulpfile.js');
+      });
+  });
+
+  it('Should generate a sources helper file for the Gulpfile with empty sources', function () {
+    return runBuildEnvGenerator()
+      .then((result) => {
+        const fileList = fs.readdirSync(result);
+        expect(fileList).to.contain('gulp-sources.json');
+        const readFile = JSON.parse(
+            fs.readFileSync(path.resolve(result, 'gulp-sources.json')).toString('utf-8'),
+        );
+        Object.keys(readFile).forEach((key) => {
+          expect(readFile[key].src).to.have.length(0);
+        });
+      });
   });
 
   it('Should generate a compilation script for templates which is unedited from the template', function () {

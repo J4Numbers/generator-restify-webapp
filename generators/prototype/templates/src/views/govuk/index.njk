@@ -1,0 +1,18 @@
+{% extends "layouts/base_page.par.njk" %}
+
+{% from "components/breadcrumbs/macro.njk" import govukBreadcrumbs %}
+
+{% block breadcrumbs %}
+    {{ govukBreadcrumbs({
+        items: [
+            {
+                text: "Home",
+                href: "/"
+            }
+        ]
+    }) }}
+{% endblock %}
+
+{% block mainContent %}
+    <h1 class="govuk-heading-x1">Hello world!</h1>
+{% endblock %}

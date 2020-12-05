@@ -1,0 +1,22 @@
+{
+  "babel": {
+    "src": [],
+    "dest": "out/assets/js"
+  },
+  "fonts": {
+    "src": [],
+    "dest": "out/assets/fonts/"
+  },
+  "images": {
+    "src": [],
+    "dest": "out/assets/images"
+  },
+  "scripts": {
+    "src": [],
+    "dest": "out/assets/js"
+  },
+  "styles": {
+    "src": [],
+    "dest": "out/assets/styles"
+  }
+}
