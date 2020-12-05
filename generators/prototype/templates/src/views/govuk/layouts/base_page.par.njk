@@ -1,0 +1,66 @@
+{% extends "template.njk" %}
+
+{% from "components/header/macro.njk" import govukHeader %}
+{% from "components/phase-banner/macro.njk" import govukPhaseBanner %}
+{% from "components/footer/macro.njk" import govukFooter %}
+
+{% set htmlLang = "en" %}
+{% set assetPath = "/assets" %}
+
+{% block pageTitle %}
+    GOV.UK - {{ metadata.name }} {% block titleAddendum %}{% endblock %}
+{% endblock %}
+
+{% block head %}
+    <link href="/assets/styles/main.css" rel="stylesheet" />
+
+    {% block head_end %}
+    {% endblock %}
+{% endblock %}
+
+{% block header %}
+    {{ govukHeader({
+        homepageUrl: "/",
+        serviceName: metadata.name
+        serviceUrl: "/",
+        classes: "app-header",
+        containerClasses: "app-width-container"
+    }) }}
+    <div class="app-phase-banner-wrapper">
+        {{ govukPhaseBanner({
+            tag: {
+                text: banner.phrase
+            },
+            classes: "app-width-container app-phase-banner",
+            html: 'This is an internally developed service - your <a class="govuk-link govuk-link--no-visited-state" href="' + banner.feedback_link + '">feedback</a> will help us to improve it.'
+        }) }}
+    </div>
+    {% block sub_navigation %}{% endblock %}
+{% endblock %}
+
+{% block main %}
+    <div class="govuk-width-container">
+        {% block beforeContent %}
+            {% block breadcrumbs %}{% endblock %}
+        {% endblock %}
+        {% block content %}
+            <div class="govuk-body" id="main-content">
+                {% block mainContent %}
+                {% endblock %}
+            </div>
+        {% endblock %}
+    </div>
+{% endblock %}
+
+{% block footer %}
+    {{ govukFooter({
+        containerClasses: "app-width-container"
+    }) }}
+{% endblock %}
+
+{% block bodyEnd %}
+    <script src="/assets/javascript/all.js" type="application/javascript" ></script>
+    <script>window.GOVUKFrontent.initAll()</script>
+    {% block bodyEndAdditional %}
+    {% endblock %}
+{% endblock %}

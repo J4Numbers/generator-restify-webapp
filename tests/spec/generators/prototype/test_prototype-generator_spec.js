@@ -29,6 +29,57 @@ describe('build: Prototype framework generator', function () {
     });
   });
 
+  it('Should extend the gulpfile sources file with normal prototype areas', function () {
+    return runBuildEnvGenerator()
+      .then((result) => {
+        const fileList = fs.readdirSync(result);
+        expect(fileList).to.contain('gulp-sources.json');
+        const readFile = JSON.parse(
+            fs.readFileSync(path.resolve(result, 'gulp-sources.json')).toString('utf-8'),
+        );
+
+        expect(Object.keys(readFile)).to.have.length(5);
+        expect(readFile).to.haveOwnProperty('babel');
+        expect(readFile.babel.src).to.have.length(1);
+        expect(readFile).to.haveOwnProperty('fonts');
+        expect(readFile.fonts.src).to.have.length(0);
+        expect(readFile).to.haveOwnProperty('images');
+        expect(readFile.images.src).to.have.length(0);
+        expect(readFile).to.haveOwnProperty('scripts');
+        expect(readFile.scripts.src).to.have.length(0);
+        expect(readFile).to.haveOwnProperty('styles');
+        expect(readFile.styles.src).to.have.length(1);
+      });
+  });
+
+  it('Should extend the gulpfile sources file with GovUK prototype areas when using that framework', function () {
+    return yHelpers
+      .run(path.join(__dirname, '../../../../generators/prototype'))
+      .withOptions({
+        app_name: 'test-build',
+        base_engine: 'GovUK',
+      })
+      .then((result) => {
+        const fileList = fs.readdirSync(result);
+        expect(fileList).to.contain('gulp-sources.json');
+        const readFile = JSON.parse(
+            fs.readFileSync(path.resolve(result, 'gulp-sources.json')).toString('utf-8'),
+        );
+
+        expect(Object.keys(readFile)).to.have.length(5);
+        expect(readFile).to.haveOwnProperty('babel');
+        expect(readFile.babel.src).to.have.length(1);
+        expect(readFile).to.haveOwnProperty('fonts');
+        expect(readFile.fonts.src).to.have.length(1);
+        expect(readFile).to.haveOwnProperty('images');
+        expect(readFile.images.src).to.have.length(1);
+        expect(readFile).to.haveOwnProperty('scripts');
+        expect(readFile.scripts.src).to.have.length(1);
+        expect(readFile).to.haveOwnProperty('styles');
+        expect(readFile.styles.src).to.have.length(2);
+      });
+  });
+
   it('Should generate a configuration folder with the default configuration', function () {
     return runBuildEnvGenerator()
       .then((result) => {
@@ -39,7 +90,7 @@ describe('build: Prototype framework generator', function () {
         expect(fs.readdirSync(path.resolve(result, 'config'))).to.contain('custom-environment-variables.js');
 
         expect(
-            fs.readFileSync(path.resolve(result, 'config/default.js')).toString('utf-8'),
+          fs.readFileSync(path.resolve(result, 'config/default.js')).toString('utf-8'),
         ).to.contain('test-build');
       });
   });
@@ -52,6 +103,45 @@ describe('build: Prototype framework generator', function () {
         expect(fs.readdirSync(path.resolve(result, 'src'))).to.contain('javascript');
         expect(fs.readdirSync(path.resolve(result, 'src'))).to.contain('stylesheets');
         expect(fs.readdirSync(path.resolve(result, 'src'))).to.contain('views');
+      });
+  });
+
+  it('should generate a simple view by default', function () {
+    return runBuildEnvGenerator()
+      .then((result) => {
+        expect(fs.readdirSync(result)).to.contain('src');
+        expect(fs.readdirSync(path.resolve(result, 'src'))).to.contain('views');
+        expect(fs.readdirSync(path.resolve(result, 'src/views'))).to.contain('index.njk');
+
+        const expectedFile = fs.readFileSync(
+          path.resolve(__dirname, '../../../../generators/prototype/templates/src/views/base/index.njk'),
+        ).toString('utf-8');
+        const discoveredFile = fs.readFileSync(
+            path.resolve(result, 'src/views/index.njk')
+        ).toString('utf-8');
+        expect(discoveredFile).to.equal(expectedFile);
+      });
+  });
+
+  it('should generate a more complex GovUK view with that build engine', function () {
+    return yHelpers
+      .run(path.join(__dirname, '../../../../generators/prototype'))
+      .withOptions({
+        app_name: 'test-build',
+        base_engine: 'GovUK',
+      })
+      .then((result) => {
+        expect(fs.readdirSync(result)).to.contain('src');
+        expect(fs.readdirSync(path.resolve(result, 'src'))).to.contain('views');
+        expect(fs.readdirSync(path.resolve(result, 'src/views'))).to.contain('index.njk');
+
+        const expectedFile = fs.readFileSync(
+            path.resolve(__dirname, '../../../../generators/prototype/templates/src/views/govuk/index.njk'),
+        ).toString('utf-8');
+        const discoveredFile = fs.readFileSync(
+            path.resolve(result, 'src/views/index.njk')
+        ).toString('utf-8');
+        expect(discoveredFile).to.equal(expectedFile);
       });
   });
 

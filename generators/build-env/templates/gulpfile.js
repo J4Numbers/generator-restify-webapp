@@ -4,32 +4,7 @@ const babel = require('gulp-babel');
 const sass = require('gulp-sass');
 
 const centralDest = 'out/';
-const pathLists = {
-  babel: {
-    src: [
-        'src/javascript/**/*.js',
-    ],
-    dest: 'out/assets/js',
-  },
-  fonts: {
-    src: [],
-    dest: 'out/assets/fonts/',
-  },
-  images: {
-    src: [],
-    dest: 'out/assets/images',
-  },
-  scripts: {
-    src: [],
-    dest: 'out/assets/js',
-  },
-  styles: {
-    src: [
-        'src/stylesheets/**/*.scss',
-    ],
-    dest: 'out/assets/styles',
-  },
-};
+const pathLists = require('./gulp-sources.json');
 
 const testInputSrc = (sources) => sources.length > 0;
 
