@@ -22,7 +22,7 @@ module.exports = class extends Generator {
   }
 
   _installDevDependencies() {
-    this.npmInstall([ '@babel/core', '@babel/preset-env', 'del', 'gulp', 'gulp-babel', 'gulp-sass', 'nunjucks' ], { 'save-dev': true });
+    this.npmInstall([ '@babel/core', '@babel/preset-env', 'del', 'gulp', 'gulp-babel', 'gulp-sass', 'sass', 'nunjucks' ], { 'save-dev': true });
   }
 
   install () {
