@@ -1,7 +1,8 @@
 const del = require('del');
+const sassCompiler = require('sass');
 const gulp = require('gulp');
 const babel = require('gulp-babel');
-const sass = require('gulp-sass');
+const sass = require('gulp-sass')(sassCompiler);
 
 const centralDest = 'out/';
 const pathLists = require('./gulp-sources.json');
